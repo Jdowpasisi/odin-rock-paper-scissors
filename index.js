@@ -2,21 +2,21 @@ let computerScore = 0;
 let playerScore = 0;
 let roundCounter = 0;
 
-const getComputerChoice = () => {
+function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
     return choices[Math.floor(Math.random() * choices.length)];
-};
+}
 
-const getHumanChoice = () => {
+function getHumanChoice() {
     const choice = document.getElementById("player-choice").value.toLowerCase();
     if (!['rock', 'paper', 'scissors'].includes(choice)) {
         document.getElementById('output').textContent = 'Invalid choice! Please choose rock, paper, or scissors.';
         return null;
     }
     return choice;
-};
+}
 
-const playRound = (computer, player) => {
+function playRound(computer, player) {
     if (computer === player) {
         return `It's a tie! Both chose ${player}.`;
     } else if (
@@ -30,9 +30,9 @@ const playRound = (computer, player) => {
         playerScore++;
         return `You win this round! ${player} beats ${computer}.`;
     }
-};
+}
 
-const playGame = () => {
+function playGame() {
     if (roundCounter >= 5) {
         document.getElementById('output').textContent += `\nGame over! Please refresh to play again.`;
         return;
@@ -61,4 +61,4 @@ const playGame = () => {
 
         document.getElementById('output').textContent += finalMessage;
     }
-};
+}
