@@ -2,20 +2,16 @@ let computerScore = 0;
 let playerScore = 0;
 let roundCounter = 0;
 
+function getHumanChoice(x){
+    if (x === 1) return 'rock';
+    if (x === 2) return 'paper';
+    return 'scissors';
+}
+
 function getComputerChoice() {
     const choices = ['rock', 'paper', 'scissors'];
     return choices[Math.floor(Math.random() * choices.length)];
 }
-
-function getHumanChoice() {
-    const choice = prompt("Enter your choice (rock, paper, or scissors):").toLowerCase();
-    if (!['rock', 'paper', 'scissors'].includes(choice)) {
-        console.log('Invalid choice! Please choose rock, paper, or scissors.');
-        return null;
-    }
-    return choice;
-}
-
 function playRound(computer, player) {
     if (computer === player) {
         return `It's a tie! Both chose ${player}.`;
@@ -32,28 +28,10 @@ function playRound(computer, player) {
     }
 }
 
-function playGame() {
-    while (roundCounter < 5) {
-        const player = getHumanChoice();
-        if (player === null) continue;
-
-        const computer = getComputerChoice();
-        const result = playRound(computer, player);
-        roundCounter++;
-
-        console.log(`\nRound ${roundCounter} of 5`);
-        console.log(result);
-        console.log(`Score: You ${playerScore} - ${computerScore} Computer`);
-    }
-
-    console.log(`\nFinal Result:`);
-    if (playerScore > computerScore) {
-        console.log(`You win the game!`);
-    } else if (computerScore > playerScore) {
-        console.log(`Computer wins the game!`);
-    } else {
-        console.log(`The game is a tie!`);
-    }
+function playGame(playerChoice) {
+    computerChoice = getComputerChoice();
+    const result = playRound(computerChoice, playerChoice);
+    document.getElementById('result').textContent = result;
+    document.getElementById('score').textContent = `Player Score: ${playerScore} | Computer Score: ${computerScore}`;
+    
 }
-
-playGame();
